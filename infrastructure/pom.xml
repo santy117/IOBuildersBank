@@ -91,7 +91,7 @@
                             <language>spring</language>
                             <output>${project.build.directory}/generated-sources/</output>
                             <generateSupportingFiles>false</generateSupportingFiles>
-                            <apiPackage>com.example.api</apiPackage>
+                            <apiPackage>com.santiagosalvador.api</apiPackage>
                             <modelPackage>com.santiagosalvador.models</modelPackage>
                             <configOptions>
                                 <interfaceOnly>true</interfaceOnly>

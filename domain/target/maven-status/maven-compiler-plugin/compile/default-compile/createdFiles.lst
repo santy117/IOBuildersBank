@@ -1,0 +1,3 @@
+com\santiagosalvador\IOBuildersBank\repository\BalanceRepository.class
+com\santiagosalvador\IOBuildersBank\model\Balance.class
+com\santiagosalvador\IOBuildersBank\service\PaymentsService.class

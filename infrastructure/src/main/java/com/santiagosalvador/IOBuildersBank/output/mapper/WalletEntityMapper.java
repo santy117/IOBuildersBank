@@ -11,6 +11,7 @@ public interface WalletEntityMapper {
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "userId", target = "user.id")
+    @Mapping(source="name", target="name")
     @Mapping(source = "balance", target = "balance")
     WalletEntity toEntity(Wallet domain);
 

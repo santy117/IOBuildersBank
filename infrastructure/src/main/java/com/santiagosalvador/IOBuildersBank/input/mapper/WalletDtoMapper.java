@@ -12,6 +12,7 @@ import org.mapstruct.Mapping;
 public interface WalletDtoMapper {
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source="name", target="name")
     @Mapping(source = "balance", target = "balance")
     WalletDTO toDto(Wallet domain);
 

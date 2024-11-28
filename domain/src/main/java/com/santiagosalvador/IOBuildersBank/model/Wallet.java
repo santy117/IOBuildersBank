@@ -15,7 +15,15 @@ import java.util.UUID;
 public class Wallet {
     private Long id;
     private Long userId;
+    private String name;
     private BigDecimal balance;
+
+
+    public Wallet(Long userId, String name) {
+        this.userId = userId;
+        this.name = name;
+        this.balance = BigDecimal.valueOf(0);
+    }
 
     public void deposit(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {

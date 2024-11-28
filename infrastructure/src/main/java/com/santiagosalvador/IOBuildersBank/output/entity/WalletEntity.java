@@ -22,6 +22,9 @@ public class WalletEntity {
     @Column(name = "WALLET_ID")
     private Long id;
 
+    @Column(name = "NAME")
+    private String name;
+
     @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)
     private UserEntity user;

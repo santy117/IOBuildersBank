@@ -11,9 +11,31 @@ servers:
 
 tags:
   - name: "user"
+  - name: "wallet"
 
 
 paths:
+  /user:
+    post:
+      summary: Creates a new user.
+      tags:
+        - "user"
+      description: Creates a new user.
+      operationId: postUser
+      requestBody:
+        description: description
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreationDTO'
+      responses:
+        "201":
+          description: CREATED
+        "400":
+          description: BAD REQUEST
+        "401":
+          description: UNAUTH
   /user/{id}:
     parameters:
       - name: id
@@ -40,11 +62,48 @@ paths:
           description: BAD REQUEST
         "401":
           description: UNAUTH
-
+  /wallet:
+    post:
+      summary: Creates a new wallet.
+      tags:
+        - "wallet"
+      description: Creates a new wallet.
+      operationId: postWallet
+      parameters:
+        - name: userId
+          description: id of the user
+          schema:
+            type: integer
+            format: int64
+          in: query
+          required: true
+        - name: name
+          description: name of the wallet
+          schema:
+            type: string
+          in: query
+          required: true
+      responses:
+        "201":
+          description: CREATED
+        "400":
+          description: BAD REQUEST
+        "401":
+          description: UNAUTH
 
 components:
 
   schemas:
+    UserCreationDTO:
+      description: This is the user creation model
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
     UserDTO:
       description: This is the user dto model
       type: object
@@ -65,7 +124,7 @@ components:
         id:
           type: integer
           format: int64
-        username:
+        name:
           type: string
         balance:
           type: number

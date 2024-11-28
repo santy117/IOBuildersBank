@@ -48,7 +48,7 @@ class UserServiceImplTest {
         wallets.add(mockWallet);
         mockUser.setWallets(wallets);
 
-        when(userRepository.getUserById(userId)).thenReturn(mockUser);
+        when(userRepository.findUserById(userId)).thenReturn(mockUser);
 
         User result = userService.getUserById(userId);
 

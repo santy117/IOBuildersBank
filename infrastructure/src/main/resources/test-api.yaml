@@ -90,6 +90,35 @@ paths:
           description: BAD REQUEST
         "401":
           description: UNAUTH
+  /wallet/{id}/deposit:
+    parameters:
+      - name: id
+        description: id of the wallet
+        schema:
+          type: integer
+          format: int64
+        in: path
+        required: true
+    post:
+      summary: Creates a deposit
+      tags:
+        - "wallet"
+      description: Creates a new deposit.
+      operationId: postWalletDeposit
+      parameters:
+        - name: amount
+          description: amount
+          schema:
+            type: number
+          in: query
+          required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: BAD REQUEST
+        "401":
+          description: UNAUTH
 
 components:
 

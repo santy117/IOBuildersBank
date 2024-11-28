@@ -30,4 +30,10 @@ public class WalletH2RepositoryImpl implements WalletRepository {
         WalletEntity walletEntity = walletEntityMapper.toEntity(wallet);
         return walletEntityMapper.toDomain(walletJPARepository.save(walletEntity));
     }
+
+    @Override
+    public Wallet findWalletById(Long id) {
+        Optional<WalletEntity> walletEntityOpt = walletJPARepository.findById(id);
+        return walletEntityOpt.map(walletEntity -> walletEntityMapper.toDomain(walletEntity)).orElse(null);
+    }
 }

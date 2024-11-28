@@ -7,4 +7,6 @@ public interface WalletRepository {
     Wallet findWalletByUserIdAndName(Long userId, String name);
 
     Wallet saveWallet(Wallet wallet);
+
+    Wallet findWalletById(Long id);
 }

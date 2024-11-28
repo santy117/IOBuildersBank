@@ -18,6 +18,6 @@ public class Transaction {
     private Long id;
     private String description;
     private Date date;
-    private BigDecimal quantity;
+    private BigDecimal amount;
     private Wallet wallet;
 }

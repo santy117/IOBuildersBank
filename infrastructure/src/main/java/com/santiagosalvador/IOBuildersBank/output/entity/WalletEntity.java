@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -31,4 +33,7 @@ public class WalletEntity {
 
     @Column(name = "BALANCE")
     private BigDecimal balance;
+
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransactionEntity> transactions = new ArrayList<>();
 }

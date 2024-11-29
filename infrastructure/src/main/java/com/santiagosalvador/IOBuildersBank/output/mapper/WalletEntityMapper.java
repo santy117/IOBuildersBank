@@ -6,13 +6,14 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = UserEntityMapper.class)
+@Mapper(componentModel = "spring", uses = {UserEntityMapper.class, TransactionEntityMapper.class})
 public interface WalletEntityMapper {
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source="name", target="name")
     @Mapping(source = "balance", target = "balance")
+    @Mapping(source = "transactions", target = "transactions")
     WalletEntity toEntity(Wallet domain);
 
     @InheritInverseConfiguration

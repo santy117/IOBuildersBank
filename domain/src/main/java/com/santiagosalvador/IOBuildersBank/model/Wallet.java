@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -17,12 +19,14 @@ public class Wallet {
     private Long userId;
     private String name;
     private BigDecimal balance;
+    private List<Transaction> transactions;
 
 
     public Wallet(Long userId, String name) {
         this.userId = userId;
         this.name = name;
         this.balance = BigDecimal.valueOf(0);
+        this.transactions = new ArrayList<>();
     }
 
     public void deposit(BigDecimal amount) {
@@ -37,5 +41,9 @@ public class Wallet {
             throw new IllegalArgumentException("Not enough balance");
         }
         this.balance = this.balance.subtract(amount);
+    }
+
+    public void addTransaction(Transaction transaction){
+        this.transactions.add(transaction);
     }
 }

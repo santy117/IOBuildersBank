@@ -8,12 +8,13 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring", uses = UserDtoMapper.class)
+@Mapper(componentModel = "spring", uses = TransactionDtoMapper.class)
 public interface WalletDtoMapper {
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source="name", target="name")
+    @Mapping(source= "name", target="name")
     @Mapping(source = "balance", target = "balance")
+    @Mapping(source = "transactions", target = "transactions")
     WalletDTO toDto(Wallet domain);
 
     @InheritInverseConfiguration

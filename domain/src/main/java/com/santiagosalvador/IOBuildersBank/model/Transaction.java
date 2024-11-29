@@ -19,5 +19,12 @@ public class Transaction {
     private String description;
     private Date date;
     private BigDecimal amount;
-    private Wallet wallet;
+    private Long walletId;
+
+    public Transaction(String description, Date date, BigDecimal amount, Long walletId) {
+        this.description = description;
+        this.date = date;
+        this.amount = amount;
+        this.walletId = walletId;
+    }
 }

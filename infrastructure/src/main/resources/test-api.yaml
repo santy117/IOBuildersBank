@@ -90,6 +90,32 @@ paths:
           description: BAD REQUEST
         "401":
           description: UNAUTH
+  /wallet/{id}:
+    parameters:
+      - name: id
+        description: id of the wallet
+        schema:
+          type: integer
+          format: int64
+        in: path
+        required: true
+    get:
+      summary: Get wallet info
+      tags:
+        - "wallet"
+      description: Get wallet info
+      operationId: getWalletId
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WalletDTO'
+        "400":
+          description: BAD REQUEST
+        "401":
+          description: UNAUTH
   /wallet/{id}/deposit:
     parameters:
       - name: id
@@ -112,6 +138,12 @@ paths:
             type: number
           in: query
           required: true
+        - name: description
+          description: description
+          schema:
+            type: string
+          in: query
+          required: false
       responses:
         "200":
           description: OK
@@ -156,4 +188,21 @@ components:
         name:
           type: string
         balance:
+          type: number
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionDTO'
+    TransactionDTO:
+      description: This is the transaction dto model
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        description:
+          type: string
+        date:
+          type: string
+        amount:
           type: number

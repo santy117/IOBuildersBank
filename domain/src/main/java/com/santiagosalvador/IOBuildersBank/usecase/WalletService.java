@@ -9,5 +9,7 @@ public interface WalletService {
     Wallet createWallet(Long userId, String name);
     Wallet getWalletByUserIDAndName(Long userId, String name);
 
-    void walletDeposit(Long id, BigDecimal amount);
+    void walletDeposit(Long id, BigDecimal amount, String description);
+
+    Wallet getWalletByWalletId(Long id);
 }

@@ -34,10 +34,14 @@ public class WalletServiceImpl implements WalletService {
             throw new WalletException.WalletNotFoundException("Wallet with ID " + id + " not found.");
         }
         try {
+            Transaction transaction = new Transaction(
+                    description!=null? description : "Deposit",
+                    new Date(),
+                    amount,
+                    wallet.getId());
+            wallet.addTransaction(transaction);
             wallet.deposit(amount);
-            Wallet updatedWallet = this.walletRepository.saveWallet(wallet);
-            Transaction transaction = new Transaction(description!=null? description : "no description", new Date(), amount, updatedWallet.getId());
-            this.transactionRepository.saveTransaction(transaction);
+            this.walletRepository.saveWallet(wallet);
 
         } catch (Exception e) {
             throw new WalletException.WalletUpdateException("Failed to update wallet with ID " + id, e);
@@ -60,4 +64,19 @@ public class WalletServiceImpl implements WalletService {
 
     }
 
+    @Override
+    @Transactional
+    public void walletTransfer(Long sourceWalletId, Long targetWalletId, BigDecimal amount, String description) {
+        Wallet sourceWallet = walletRepository.findWalletById(sourceWalletId);
+        Wallet targetWallet = walletRepository.findWalletById(targetWalletId);
+
+        if (sourceWallet == null || targetWallet == null) {
+            throw new WalletException.WalletNotFoundException("One of the wallets not found.");
+        }
+
+        sourceWallet.transferTo(targetWallet, amount, description);
+
+        walletRepository.saveWallet(sourceWallet);
+        walletRepository.saveWallet(targetWallet);
+    }
 }

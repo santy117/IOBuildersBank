@@ -47,4 +47,14 @@ public class WalletController implements WalletApi {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
+
+    @Override
+    public ResponseEntity<Void> postWalletTransfer(Long id, Long targetId, BigDecimal amount, String description) {
+        try {
+            this.walletService.walletTransfer(id, targetId, amount, description);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (WalletException.WalletUpdateException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
 }

@@ -53,7 +53,7 @@ public class WalletController implements WalletApi {
         try {
             this.walletService.walletTransfer(id, targetId, amount, description);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (WalletException.WalletUpdateException e) {
+        } catch (WalletException.InsufficientFundsException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }

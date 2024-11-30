@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,8 +27,12 @@ class UserServiceImplTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    PasswordEncoder passwordEncoder;
+
     @InjectMocks
     private UserServiceImpl userService;
+
 
     @BeforeEach
     void setUp() {
@@ -79,9 +84,10 @@ class UserServiceImplTest {
         String password = "password";
         String email = "newuser@gmail.com";
 
+        when(passwordEncoder.encode(password)).thenReturn("passwordEncoded");
         when(userRepository.findUserByUsername(username)).thenReturn(null);
 
-        User mockUser = new User(username, password, email);
+        User mockUser = new User(username, "passwordEncoded", email);
         when(userRepository.saveUser(any(User.class))).thenReturn(mockUser);
 
         User result = userService.createUser(username, password, email);

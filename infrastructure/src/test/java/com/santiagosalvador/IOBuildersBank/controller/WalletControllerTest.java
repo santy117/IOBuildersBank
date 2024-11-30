@@ -125,7 +125,7 @@ class WalletControllerTest {
         BigDecimal amount = BigDecimal.valueOf(50.00);
         String description = "Transfer";
 
-        doThrow(WalletException.WalletUpdateException.class)
+        doThrow(WalletException.InsufficientFundsException.class)
                 .when(walletService).walletTransfer(sourceWalletId, targetWalletId, amount, description);
 
         ResponseEntity<Void> responseEntity = walletController.postWalletTransfer(sourceWalletId, targetWalletId, amount, description);

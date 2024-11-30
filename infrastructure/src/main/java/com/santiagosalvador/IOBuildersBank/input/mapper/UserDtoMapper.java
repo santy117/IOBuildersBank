@@ -13,6 +13,7 @@ public interface UserDtoMapper {
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "username", target = "username")
+    @Mapping(source = "email", target = "email")
     @Mapping(source = "wallets", target = "wallets")
     UserDTO toDto (User domain);
 

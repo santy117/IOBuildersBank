@@ -12,6 +12,7 @@ servers:
 tags:
   - name: "user"
   - name: "wallet"
+  - name: "auth"
 
 
 paths:
@@ -193,6 +194,37 @@ paths:
           description: BAD REQUEST
         "401":
           description: UNAUTH
+  /login:
+    post:
+      summary: Login.
+      tags:
+        - "auth"
+      description: Login.
+      operationId: postLogin
+      parameters:
+        - name: username
+          description: username
+          schema:
+            type: string
+          in: query
+          required: true
+        - name: password
+          description: password
+          schema:
+            type: string
+          in: query
+          required: true
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponseDTO'
+        "400":
+          description: BAD REQUEST
+        "401":
+          description: UNAUTH
 
 components:
 
@@ -250,3 +282,11 @@ components:
           type: string
         amount:
           type: number
+    AuthResponseDTO:
+      description: This is the auth response dto model
+      type: object
+      properties:
+        username:
+          type: string
+        token:
+          type: string

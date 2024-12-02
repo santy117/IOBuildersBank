@@ -22,7 +22,7 @@ This project is designed using **Hexagonal Architecture (Ports and Adapters)** a
 
 For each **Bounded Context**, such as `User` or `Wallet`:
 - Business rules and use cases are encapsulated in a **single service interface**, implemented in the **Application Layer**.
-- While individual use cases could be split into separate classes, grouping them into a cohesive service interface helps reduce the number of classes, making the codebase cleaner and easier to navigate
+- While individual use cases could be split into separate classes, grouping them into a service interface for each context helps reduce the number of classes, making the codebase cleaner and easier to navigate, specially if the application scales too much.
 
   
 ### Core Design Principles

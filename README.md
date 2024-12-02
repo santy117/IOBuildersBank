@@ -79,6 +79,7 @@ For each **Bounded Context**, such as `User` or `Wallet`:
 3. Run the application:
 
 ```bash
+cd bootloader
 mvn spring-boot:run
 ```
 4. Access the API at http://localhost:8080

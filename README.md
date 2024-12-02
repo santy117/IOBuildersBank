@@ -87,8 +87,6 @@ mvn spring-boot:run
 ```
 4. Access the API at http://localhost:8080
 
-Before running the application, here are a few key considerations to ensure a smooth setup:
-
 ### Database Configuration
 
 - **Database URL**: The application uses an embedded H2 database.
@@ -97,11 +95,6 @@ Before running the application, here are a few key considerations to ensure a sm
   - **Password**: `iobuilders`
 - **H2 Console**: The database can be accessed via the H2 console at:
   - [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
-  - Ensure the H2 console is enabled by checking the `application.properties` file:
-    ```properties
-    spring.h2.console.enabled=true
-    spring.h2.console.path=/h2-console
-    ```
 
 ### Initialization Script
 
@@ -115,11 +108,11 @@ An initialization script runs automatically when the application starts. It seed
   - `wallet1`: Balance of 100.00
   - `wallet2`: Balance of 50.00
 
-These wallets are linked to the above user.
+These wallets are linked to the above user, and this data is used to test the integration tests and to allow an initial configuration of the bank application.
 
 ### Password Hashing
 
-For enhanced security, passwords are stored in the database as hashed values using **BCrypt**. This ensures that sensitive user data remains protected.
+For enhanced security, passwords are stored in the database as hashed values using **BCrypt**.
 
 ## Authentication
 
@@ -132,13 +125,6 @@ To log in, create a new user first, or use the `/login` endpoint with the follow
 
 Upon successful login, a JWT token will be returned. This token must be included in the `Authorization` header as a Bearer token for all subsequent requests requiring authentication.
 
-## Running the Application
-
-To run the application:
-1. Start the Spring Boot application.
-2. Access the H2 console (if needed) at [http://localhost:8080/h2-console](http://localhost:8080/h2-console) with the credentials specified above.
-3. Use the `/login` endpoint to authenticate and obtain a JWT token.
-4. Test other endpoints using the JWT token for secure access.
 
 ---
 

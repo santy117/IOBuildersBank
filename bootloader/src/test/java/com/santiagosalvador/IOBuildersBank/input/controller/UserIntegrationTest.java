@@ -1,4 +1,4 @@
-package com.santiagosalvador.IOBuildersBank.controller;
+package com.santiagosalvador.IOBuildersBank.input.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.santiagosalvador.IOBuildersBank.PTSantiagoApplication;

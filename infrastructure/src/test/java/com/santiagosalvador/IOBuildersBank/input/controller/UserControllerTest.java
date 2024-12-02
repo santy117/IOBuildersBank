@@ -1,7 +1,6 @@
-package com.santiagosalvador.IOBuildersBank.controller;
+package com.santiagosalvador.IOBuildersBank.input.controller;
 
-import com.santiagosalvador.IOBuildersBank.exception.UserAlreadyExistsException;
-import com.santiagosalvador.IOBuildersBank.input.controller.UserController;
+import com.santiagosalvador.IOBuildersBank.exception.UserException;
 import com.santiagosalvador.IOBuildersBank.input.mapper.UserDtoMapper;
 import com.santiagosalvador.IOBuildersBank.model.User;
 import com.santiagosalvador.IOBuildersBank.usecase.UserService;
@@ -18,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -74,7 +72,7 @@ class UserControllerTest {
         userCreationDTO.setPassword("password");
         userCreationDTO.setEmail("mail");
 
-        when(userService.createUser(userCreationDTO.getUsername(),userCreationDTO.getPassword(),userCreationDTO.getEmail())).thenThrow(UserAlreadyExistsException.class);
+        when(userService.createUser(userCreationDTO.getUsername(),userCreationDTO.getPassword(),userCreationDTO.getEmail())).thenThrow(UserException.UserAlreadyExistsException.class);
         ResponseEntity<Void> responseEntity = userController.postUser(userCreationDTO);
 
         assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());

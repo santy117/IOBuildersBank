@@ -1,9 +1,8 @@
-package com.santiagosalvador.IOBuildersBank.controller;
+package com.santiagosalvador.IOBuildersBank.input.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.santiagosalvador.IOBuildersBank.PTSantiagoApplication;
 import com.santiagosalvador.models.AuthResponseDTO;
-import com.santiagosalvador.models.WalletDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,8 +14,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.math.BigDecimal;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;

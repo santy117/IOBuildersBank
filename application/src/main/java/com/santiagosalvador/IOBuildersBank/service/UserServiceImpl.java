@@ -1,6 +1,6 @@
 package com.santiagosalvador.IOBuildersBank.service;
 
-import com.santiagosalvador.IOBuildersBank.exception.UserAlreadyExistsException;
+import com.santiagosalvador.IOBuildersBank.exception.UserException;
 import com.santiagosalvador.IOBuildersBank.model.User;
 import com.santiagosalvador.IOBuildersBank.repository.UserRepository;
 import com.santiagosalvador.IOBuildersBank.usecase.UserService;
@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService {
     public User createUser(String username, String password, String email) {
         User exists = this.getUserByUsername(username);
         if(exists != null){
-            throw new UserAlreadyExistsException("User with username " + username + " already exists");
+            throw new UserException.UserAlreadyExistsException("User with username " + username + " already exists");
         }
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = this.passwordEncoder.encode(password);
 
         return this.userRepository.saveUser(new User(username, encodedPassword, email));
 

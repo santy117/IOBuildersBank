@@ -1,8 +1,6 @@
 package com.santiagosalvador.IOBuildersBank.input.mapper;
 
 import com.santiagosalvador.IOBuildersBank.model.Wallet;
-import com.santiagosalvador.IOBuildersBank.output.entity.WalletEntity;
-import com.santiagosalvador.IOBuildersBank.output.mapper.UserEntityMapper;
 import com.santiagosalvador.models.WalletDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

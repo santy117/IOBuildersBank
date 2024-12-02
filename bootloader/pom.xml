@@ -12,6 +12,8 @@
     <artifactId>bootloader</artifactId>
 
     <properties>
+        <start-class>com.santiagosalvador.IOBuildersBank.PTSantiagoApplication</start-class>
+
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>

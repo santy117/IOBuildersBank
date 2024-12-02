@@ -1,7 +1,6 @@
-package com.santiagosalvador.IOBuildersBank.controller;
+package com.santiagosalvador.IOBuildersBank.input.controller;
 
 import com.santiagosalvador.IOBuildersBank.exception.WalletException;
-import com.santiagosalvador.IOBuildersBank.input.controller.WalletController;
 import com.santiagosalvador.IOBuildersBank.input.mapper.WalletDtoMapper;
 import com.santiagosalvador.IOBuildersBank.model.Wallet;
 import com.santiagosalvador.IOBuildersBank.usecase.WalletService;

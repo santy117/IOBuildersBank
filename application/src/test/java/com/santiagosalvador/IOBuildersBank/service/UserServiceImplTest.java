@@ -1,6 +1,6 @@
 package com.santiagosalvador.IOBuildersBank.service;
 
-import com.santiagosalvador.IOBuildersBank.exception.UserAlreadyExistsException;
+import com.santiagosalvador.IOBuildersBank.exception.UserException;
 import com.santiagosalvador.IOBuildersBank.model.User;
 import com.santiagosalvador.IOBuildersBank.model.Wallet;
 import com.santiagosalvador.IOBuildersBank.repository.UserRepository;
@@ -104,6 +104,6 @@ class UserServiceImplTest {
         User existingUser = new User(username, password, email);
         when(userRepository.findUserByUsername(username)).thenReturn(existingUser);
 
-        assertThrows(UserAlreadyExistsException.class, () -> userService.createUser(username, password, email));
+        assertThrows(UserException.UserAlreadyExistsException.class, () -> userService.createUser(username, password, email));
     }
 }

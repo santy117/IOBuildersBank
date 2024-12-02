@@ -1,7 +1,6 @@
 package com.santiagosalvador.IOBuildersBank.output.repository.wallet;
 
 import com.santiagosalvador.IOBuildersBank.model.Wallet;
-import com.santiagosalvador.IOBuildersBank.output.entity.UserEntity;
 import com.santiagosalvador.IOBuildersBank.output.entity.WalletEntity;
 import com.santiagosalvador.IOBuildersBank.output.mapper.WalletEntityMapper;
 import com.santiagosalvador.IOBuildersBank.repository.WalletRepository;

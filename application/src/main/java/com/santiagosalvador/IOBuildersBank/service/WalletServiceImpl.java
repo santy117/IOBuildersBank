@@ -3,7 +3,6 @@ package com.santiagosalvador.IOBuildersBank.service;
 import com.santiagosalvador.IOBuildersBank.exception.WalletException;
 import com.santiagosalvador.IOBuildersBank.model.Transaction;
 import com.santiagosalvador.IOBuildersBank.model.Wallet;
-import com.santiagosalvador.IOBuildersBank.repository.TransactionRepository;
 import com.santiagosalvador.IOBuildersBank.repository.WalletRepository;
 import com.santiagosalvador.IOBuildersBank.usecase.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ import java.util.Date;
 @Service
 public class WalletServiceImpl implements WalletService {
 
-    @Autowired
-    TransactionRepository transactionRepository;
     @Autowired
     WalletRepository walletRepository;
 

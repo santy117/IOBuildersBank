@@ -1,6 +1,5 @@
 package com.santiagosalvador.IOBuildersBank.output.repository.wallet;
 
-import com.santiagosalvador.IOBuildersBank.output.entity.UserEntity;
 import com.santiagosalvador.IOBuildersBank.output.entity.WalletEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

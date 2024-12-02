@@ -1,9 +1,7 @@
 package com.santiagosalvador.IOBuildersBank.input.mapper;
 
 import com.santiagosalvador.IOBuildersBank.model.Transaction;
-import com.santiagosalvador.IOBuildersBank.model.Wallet;
 import com.santiagosalvador.models.TransactionDTO;
-import com.santiagosalvador.models.WalletDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

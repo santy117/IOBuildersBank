@@ -1,9 +1,7 @@
 package com.santiagosalvador.IOBuildersBank.service;
 
 import com.santiagosalvador.IOBuildersBank.exception.WalletException;
-import com.santiagosalvador.IOBuildersBank.model.Transaction;
 import com.santiagosalvador.IOBuildersBank.model.Wallet;
-import com.santiagosalvador.IOBuildersBank.repository.TransactionRepository;
 import com.santiagosalvador.IOBuildersBank.repository.WalletRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,9 +23,6 @@ class WalletServiceImplTest {
 
     @Mock
     private WalletRepository walletRepository;
-
-    @Mock
-    private TransactionRepository transactionRepository;
 
     @InjectMocks
     private WalletServiceImpl walletService;

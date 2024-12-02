@@ -7,7 +7,7 @@ A RESTful banking application that supports user management, wallet operations, 
 ## Table of Contents
 - [Hex Architecture approach](#hex-architecture)
 - [Technologies Used](#technologies-used)
-- [Setup Instructions](#setup-instructions)
+- [Getting started](#setup-instructions)
 - [Endpoints](#endpoints)
   - [Authentication](#authentication)
   - [User Management](#user-management)
@@ -65,7 +65,9 @@ For each **Bounded Context**, such as `User` or `Wallet`:
 
 ---
 
-## Setup Instructions
+## Getting Started
+
+### Setup Instructions
 
 1. Clone repository:
   ```bash
@@ -84,8 +86,6 @@ cd bootloader
 mvn spring-boot:run
 ```
 4. Access the API at http://localhost:8080
-
-## Getting Started
 
 Before running the application, here are a few key considerations to ensure a smooth setup:
 

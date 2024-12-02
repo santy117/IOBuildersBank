@@ -58,7 +58,8 @@ For each **Bounded Context**, such as `User` or `Wallet`:
 - **Spring Boot** for REST API development  
 - **H2 Database** for persistent storage  
 - **Spring Security** for authentication and authorization  
-- **JWT** for stateless authentication  
+- **JWT** for stateless authentication
+- **OpenApi 3.0** for API First design and implementation of the APIs   
 - **Web3j** for blockchain integration with Ganache  
 - **Maven** for project build and dependency management  
 

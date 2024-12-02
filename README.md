@@ -41,6 +41,16 @@ For each **Bounded Context**, such as `User` or `Wallet`:
      - **DTOs (Data Transfer Objects)**: Used for input and output through external ports.
    - This separation ensures a clean boundary between layers, preserving the independence of the core domain.
 
+### Testing Strategy
+
+1. **Unit Tests**:
+   - Extensive unit tests have been written for:
+     - Service implementations in the **Application Layer**.
+     - Input and output ports to ensure that the core domain logic adheres to the defined interfaces.
+
+2. **Integration Tests**:
+   - Integration tests are implemented in the **Bootloader Module**.
+   - These tests verify the end-to-end behavior of the application, ensuring that all components work seamlessly together.
 
 ---
 

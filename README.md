@@ -1,3 +1,4 @@
+
 # IOBuildersBank - RESTful Banking Application
 
 
@@ -41,6 +42,7 @@ For each **Bounded Context**, such as `User` or `Wallet`:
 - **Java 17**
 - **Spring Boot**
 - **H2 Database**  
+- **BCrypt** 
 - **Spring Security**
 - **JWT Authentication**
 - **OpenApi 3.0**
@@ -56,7 +58,7 @@ For each **Bounded Context**, such as `User` or `Wallet`:
 
 1. Clone repository:
   ```bash
-  git clone https://github.com/your-repo-name.git
+  git clone https://github.com/santy117/IOBuildersBank.git
   cd IOBuildersBank
   ```
    
@@ -85,7 +87,7 @@ The application seeds the database with the following data:
 
 - **User**:
   - Username: `santisr117`
-  - Password: `123123` (password is securely hashed)
+  - Password: `123123` (password is stored in the database as a hash)
   
 - **Wallets**:
   - `wallet1`: Balance 100.00
@@ -97,23 +99,171 @@ These wallets are linked to the above user, and this data is used to test the in
 
 For enhanced security, passwords are stored in the database as hashed values using **BCrypt**.
 
-## Authentication
+
+---
+## API
 
 The API uses **JWT-based authentication**.
 
 ### Login
 
 - **Endpoint**: `POST /login`
-
+Retrieves a token for the specified user.
 You can create first a new user or use the already created user: 
-**Input** (JSON):
+
+**Input parameters**
+| parameter | type | example value | in | required
+|--|--|--|--|--|
+| username |string| santisr117 |query| true|
+| password|string| 123123|query| true|
+
+**Sample response**
 ```json
 {
-  "username": "santisr117",
-  "password": "123123"
+
+"username": "santisr117",
+
+"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW50aXNyMTE3IiwiaWF0IjoxNzMzMjI3MDkxLCJleHAiOjE3MzMzMTM0OTF9.98pu6n2Sf0K0YEiQveIySLu7mwnoZFk7bUsx6MPm_L0"
+
 }
+```
+### User
 
+- **Endpoint**: `POST /user`
 
+	Creates a new user.
+	**Input parameters**
+	| parameter | type | example value| in | required
+	|--|--|--|--|--|
+	| Authorization | JWT| Bearer + JWT Token | Header | true
+	**Input Json**
+	```json
+	{
+
+	"username": "santisr117",
+
+	"password": "123123",
+
+	"email": "santiagosr117@gmail.com"
+
+	}
+	```
+	**Sample response**
+	 `Http Status 201: Created`
+
+- **Endpoint**: `GET /user/{id}`
+
+	Get user info by id.
+	**Input parameters**
+	| parameter | type | example value| in | required
+	|--|--|--|--|--|
+	| Authorization | JWT| Bearer + JWT Token | Header | true
+	| id | integer| 1 | Path | true
+	
+	**Sample response**
+	 ```json
+		{
+	    "username": "santisr117",
+	    "email": "santiagosr117@gmail.com",
+	    "id": 1,
+	    "wallets": [
+	        {
+	            "id": 1,
+	            "name": "wallet1",
+	            "balance": 115.00,
+	            "transactions": [
+	                {
+	                    "id": 1,
+	                    "description": "transaction 1",
+	                    "date": "3/12/24 17:08",
+	                    "amount": 15.00
+	                }
+	            ]
+	        },
+	        {
+	            "id": 2,
+	            "name": "wallet2",
+	            "balance": 50.00,
+	            "transactions": []
+	        }
+	    ]
+	}
+### Wallet
+
+- **Endpoint**: `POST /wallet`
+
+	Creates a new wallet.
+	**Input parameters**
+	| parameter | type | example value| in |
+	|--|--|--|--|
+	| Authorization | JWT| Bearer + JWT Token | Header 
+	| userId | integer| 1 | Query 
+	| name | string| wallet 3 | Query 
+	
+	**Sample response**
+	 `Http Status 201: Created`
+- **Endpoint**: `GET /wallet/{id}`
+
+	Get wallet info by id.
+	**Input parameters**
+	| parameter | type | example value| in | required
+	|--|--|--|--|--|
+	| Authorization | JWT| Bearer + JWT Token | Header | true
+	| id | integer| 1 | Path | true
+	
+	**Sample response**
+	 ```json
+		{
+	    "id": 1,
+	    "name": "wallet1",
+	    "balance": 80.00,
+	    "transactions": [
+	        {
+	            "id": 1,
+	            "description": "tx1",
+	            "date": "3/12/24 17:08",
+	            "amount": 15.00
+	        },
+	        {
+	            "id": 2,
+	            "description": "Transfer to wallet 2",
+	            "date": "3/12/24 17:16",
+	            "amount": -50.00
+	        },
+	        {
+	            "id": 4,
+	            "description": "tx2",
+	            "date": "3/12/24 17:16",
+	            "amount": 15.00
+	        }
+	    ]
+	}
+- **Endpoint**: `POST /wallet/{id}/deposit`
+
+	Makes a new deposit to a specified wallet id.
+	**Input parameters**
+	| parameter | type | example value| in | required
+	|--|--|--|--|--|
+	| Authorization | JWT| Bearer + JWT Token | Header | true
+	| id | integer| 1 | Path | true
+	| amount | number | 10 | Query  | true
+	| description | string| new deposit | Query  | false
+	
+	**Sample response**
+	 `Http Status 200: OK`
+- **Endpoint**: `POST /wallet/{id}/transfer`
+
+	Makes a transfer from a source wallet to a specified wallet id.
+	**Input parameters**
+	| parameter | type | example value| in | required
+	|--|--|--|--|--|
+	| Authorization | JWT| Bearer + JWT Token | Header  | true
+	| id | integer| 1 | Path | true
+	| amount | number | 10 | Query  | true
+	| target id | integer | 2 | Query  | true
+	
+	**Sample response**
+	 `Http Status 200: OK`
 ---
 
 

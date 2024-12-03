@@ -136,6 +136,7 @@ You can create first a new user or use the already created user:
 	| parameter | type | example value| in | required
 	|--|--|--|--|--|
 	| Authorization | JWT| Bearer + JWT Token | Header | true
+
 	**Input Json**
 	```json
 	{

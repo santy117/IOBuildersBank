@@ -29,11 +29,11 @@ For each **Bounded Context**, such as `User` or `Wallet`:
    - Interfaces are implemented in the infrastructure layer, allowing for easy replacement of external adapters without affecting the core logic.
 
 3. **Entity-DTO Mapping**:  
-   - Mappers convert **business logic entities** and **DTOs** (for input/output), maintaining separation between layers and preserving core domain independence.
+   - Mappers convert business logic entities and DTOs for input and output, maintaining separation between layers and preserving core domain independence.
 
 ### Testing
 - **Unit Tests**: Cover application services and input/output ports.
-- **Integration Tests**: Verify end-to-end functionality in the Bootloader module.
+- **Integration Tests**: Verify end-to-end functionality in the Bootloader module with preinjected data.
 
 ---
 

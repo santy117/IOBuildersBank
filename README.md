@@ -1,67 +1,52 @@
 # IOBuildersBank - RESTful Banking Application
 
-A RESTful banking application that supports user management, wallet operations, and secure authentication using JWT. This project demonstrates how to manage users, wallets, and transactions while integrating with blockchain for additional wallet functionality.
-
----
 
 ## Table of Contents
 - [Hex Architecture approach](#hex-architecture)
 - [Technologies Used](#technologies-used)
 - [Getting started](#setup-instructions)
+- [Blockchain integration](#blockchain-integration)
 - [Endpoints](#endpoints)
-  - [Authentication](#authentication)
-  - [User Management](#user-management)
-  - [Wallet Management](#wallet-management)
-- [Example JSON Responses](#example-json-responses)
 
 ---
 ## My Hexagonal Architecture Approach
 
-This project is designed using **Hexagonal Architecture (Ports and Adapters)** and DDD to ensure a clean separation of concerns and maintainability.
+This project is designed using Hexagonal Architecture and DDD to ensure a clean separation of concerns and maintainability.
 ### Bounded Contexts and Use Case Grouping
 
 For each **Bounded Context**, such as `User` or `Wallet`:
-- Business rules and use cases are encapsulated in a **single service interface**, implemented in the **Application Layer**.
-- While individual use cases could be split into separate classes, grouping them into a service interface for each context helps reduce the number of classes, making the codebase cleaner and easier to navigate, specially if the application scales too much.
+- Business rules and use cases are encapsulated in a single service interface, implemented in the Application Layer. While individual use cases could be split into separate classes, I find it cleaner by
+  grouping them into a service interface for each context, specially if the application scales too much.
 
   
-### Core Design Principles
+### Core Design Approach
 
-1. **Encapsulation of Input and Output Logic**:
-   - **Input**: Defined through interfaces in the domain layer to handle the use cases of the application. These interfaces specify how the application core interacts with external systems.
-   - **Output**: Interfaces are defined for operations like database persistence and retrieval. These interfaces abstract the interaction with external systems like databases or third-party APIs.
+1. **Input/Output Encapsulation**:  
+   - **Input**: Interfaces in the domain layer define use case interactions.  
+   - **Output**: Interfaces abstract external systems, in this case H2 database.
 
-2. **Infrastructure Implementations**:
-   - The input and output interfaces are implemented in the **Infrastructure Layer**, keeping the core domain independent of specific technologies.
-   - If there is a need to replace a database adapter or the input mechanism (e.g., switch from an HTTP API to a message queue), only the infrastructure implementations need to change. The application core remains consistent.
+2. **Infrastructure Implementations**:  
+   - Interfaces are implemented in the infrastructure layer, allowing for easy replacement of external adapters without affecting the core logic.
 
-3. **Entity-DTO Mapping**:
-   - The infrastructure layer contains **mappers** to convert entities between:
-     - **Business Logic Entities**: Used within the core domain.
-     - **DTOs (Data Transfer Objects)**: Used for input and output through external ports.
-   - This separation ensures a clean boundary between layers, preserving the independence of the core domain.
+3. **Entity-DTO Mapping**:  
+   - Mappers convert **business logic entities** and **DTOs** (for input/output), maintaining separation between layers and preserving core domain independence.
 
-### Testing Strategy
-
-1. **Unit Tests**:
-   - Extensive unit tests have been written for:
-     - Service implementations in the **Application Layer**.
-     - Input and output ports to ensure that the core domain logic adheres to the defined interfaces.
-
-2. **Integration Tests**:
-   - Integration tests are implemented in the **Bootloader Module**.
-   - These tests verify the end-to-end behavior of the application, ensuring that all components work seamlessly together.
+### Testing
+- **Unit Tests**: Cover application services and input/output ports.
+- **Integration Tests**: Verify end-to-end functionality in the Bootloader module.
 
 ---
 
 ## Technologies Used
-- **Spring Boot** for REST API development  
-- **H2 Database** for persistent storage  
-- **Spring Security** for authentication and authorization  
-- **JWT** for stateless authentication
-- **OpenApi 3.0** for API First design and implementation of the APIs   
-- **Web3j** for blockchain integration with Ganache  
-- **Maven** for project build and dependency management  
+- **Java 17**
+- **Spring Boot**
+- **H2 Database**  
+- **Spring Security**
+- **JWT Authentication**
+- **OpenApi 3.0**
+- **Web3j**
+- **Truffle and Ganache**
+- **Maven**
 
 ---
 
@@ -87,26 +72,24 @@ mvn spring-boot:run
 ```
 4. Access the API at http://localhost:8080
 
-### Database Configuration
+### Access the API and H2 Database
 
-- **Database URL**: The application uses an embedded H2 database.
-- **Access Credentials**:
+- **Base URL**: `http://localhost:8080`
+- **H2 Console**: `http://localhost:8080/h2-console`
   - **Username**: `santiago`
   - **Password**: `iobuilders`
-- **H2 Console**: The database can be accessed via the H2 console at:
-  - [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
 
 ### Initialization Script
 
-An initialization script runs automatically when the application starts. It seeds the database with the following data:
+The application seeds the database with the following data:
 
 - **User**:
-  - **Username**: `santisr117`
-  - **Password**: `123123` (hashed and stored securely in the database)
-  - **Email**: `santiagosr117@gmail.com`
+  - Username: `santisr117`
+  - Password: `123123` (password is securely hashed)
+  
 - **Wallets**:
-  - `wallet1`: Balance of 100.00
-  - `wallet2`: Balance of 50.00
+  - `wallet1`: Balance 100.00
+  - `wallet2`: Balance 50.00
 
 These wallets are linked to the above user, and this data is used to test the integration tests and to allow an initial configuration of the bank application.
 
@@ -116,14 +99,18 @@ For enhanced security, passwords are stored in the database as hashed values usi
 
 ## Authentication
 
-The application uses **JWT-based authentication**. 
+The API uses **JWT-based authentication**.
 
-To log in, create a new user first, or use the `/login` endpoint with the following credentials:
+### Login
 
-- **Username**: `santisr117`
-- **Password**: `123123`
+- **Endpoint**: `POST /login`
 
-Upon successful login, a JWT token will be returned. This token must be included in the `Authorization` header as a Bearer token for all subsequent requests requiring authentication.
+**Input** (JSON):
+```json
+{
+  "username": "santisr117",
+  "password": "123123"
+}
 
 
 ---

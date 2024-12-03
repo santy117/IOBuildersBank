@@ -105,6 +105,7 @@ The API uses **JWT-based authentication**.
 
 - **Endpoint**: `POST /login`
 
+You can create first a new user or use the already created user: 
 **Input** (JSON):
 ```json
 {

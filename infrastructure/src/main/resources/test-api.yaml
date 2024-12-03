@@ -13,6 +13,7 @@ tags:
   - name: "user"
   - name: "wallet"
   - name: "auth"
+  - name: "blockchain"
 
 
 paths:
@@ -194,6 +195,31 @@ paths:
           description: BAD REQUEST
         "401":
           description: UNAUTH
+  /blockchain/balance:
+    get:
+      summary: get blockchain wallet address balance
+      tags:
+        - "blockchain"
+      description: get blockchain wallet address balance
+      operationId: getBlockchainBalance
+      parameters:
+        - name: walletAddress
+          description: walletAddress
+          schema:
+            type: string
+          in: query
+          required: true
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceResponseDTO'
+        "400":
+          description: BAD REQUEST
+        "401":
+          description: UNAUTH
   /login:
     post:
       summary: Login.
@@ -290,3 +316,9 @@ components:
           type: string
         token:
           type: string
+    BalanceResponseDTO:
+      description: This is the balance response dto model
+      type: object
+      properties:
+        balance:
+          type: number

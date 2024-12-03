@@ -3,11 +3,11 @@
 
 
 ## Table of Contents
-- [Hex Architecture approach](#hex-architecture)
+- [My Hexagonal Architecture approach](#my-hexagonal-architecture-approach)
 - [Technologies Used](#technologies-used)
-- [Getting started](#setup-instructions)
+- [Getting started](#getting-started)
 - [Blockchain integration](#blockchain-integration)
-- [Endpoints](#endpoints)
+- [API](#api)
 
 ---
 ## My Hexagonal Architecture Approach
@@ -99,6 +99,35 @@ These wallets are linked to the above user, and this data is used to test the in
 
 For enhanced security, passwords are stored in the database as hashed values using **BCrypt**.
 
+## Blockchain Integration
+
+I created a small integration with a local Ethereum blockchain using Ganache and Truffle for deploying and interacting with a simple smart contract that exposes a simple public view function and does not consume gas. This function is used to check the Ether balance of a specified address, and this functionality is completely separate from the rest of the application logic, it has only been created to test the integration with the blockchain, and the application mantains all the other functionalities if we don't set up the blockchain integration.
+
+### Steps to Set Up the Blockchain
+
+1. **Run the Local Blockchain (Ganache)**
+   - Start Ganache and click on Quickstart.
+   - By default, Ganache will run on `localhost:7545`.
+
+2. **Deploy the Contract Using Truffle**
+     ```bash
+     cd check-ether-contract
+     truffle migrate
+     ```
+
+3. **Update `application.properties`**
+   - After deployment, obtain the contract address and the private key of one of the accounts created in Ganache. 
+   - Update the following properties to your `application.properties` file:
+     ```properties
+     blockchain.contract.address=<your_contract_address>
+     blockchain.credentials.privateKey=<your_private_key>
+     ```
+
+4. **Launch the Application**
+   - Now that the blockchain is running and the contract is deployed, launch the application:
+     ```bash
+     mvn spring-boot:run
+     ```
 
 ---
 ## API
@@ -136,7 +165,7 @@ You can create first a new user or use the already created user:
 	| parameter | type | example value| in | required
 	|--|--|--|--|--|
 	| Authorization | JWT| Bearer + JWT Token | Header | true
-
+	
 	**Input Json**
 	```json
 	{
@@ -266,6 +295,22 @@ You can create first a new user or use the already created user:
 	**Sample response**
 	 `Http Status 200: OK`
 ---
+### Blockchain <a name="Blockchain"></a>
+
+- **Endpoint**: `GET /blockchain/balance`
+
+	Check the balance of a wallet address in the local blockchain.
+	**Input parameters**
+	| parameter | type | example value| in | required
+	|--|--|--|--|--|
+	| Authorization | JWT| Bearer + JWT Token | Header | true
+	| walletAddress | string | 0x0c642236ac09e6a4402921b5a9e6ae2f0a49f00c | Query | true
+	
+	**Sample response**
+	 ```json
+		{
+	    "balance": 100
+	    }
 
 
 
